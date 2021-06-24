@@ -26,6 +26,13 @@
         <my-button primary size="small" @onClick="onCreateAccount" label="Sign up" v-if="!user" />
       </div>
     </div>
+    <my-card shadow="always">
+      <div class="header">
+        <span style="padding-left: 10px">卡片内容</span>
+        <button class="button">操作按钮</button>
+      </div>
+      <div v-for="a in 4" :key="a" class="item">{{'列表内容' + a}}</div>
+    </my-card>
   </header>
 </template>
 
