@@ -34,7 +34,7 @@ export default {
   //   };
   // },
   computed: {
-    shadowClass= function() {
+    shadowClass :function() {
       return {
         [`z-card--${this.shadow}`]: true,
       }
