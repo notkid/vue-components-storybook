@@ -12,11 +12,11 @@ export default {
 const Template = (args, { argTypes }) => ({
   props: Object.keys(argTypes),
   components: { MyCard },
-  template: '<my-card @onClick="onClick" v-bind="$props" />',
+  template: '<card @onClick="onClick" v-bind="$props" />',
 });
 
-export const FisetCard = Template.bind({});
-FisetCard.args = {
-  // FisetCard: true,
+export const FirstCard = Template.bind({});
+FirstCard.args = {
+  FirstCard: true,
   // label: 'MyCard1',
 };
