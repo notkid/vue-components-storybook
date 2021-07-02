@@ -1,4 +1,4 @@
-import MyCard from '../components/card.vue'
+import MyCard from './card.vue'
 
 export default {
   title: 'Example/Card',

@@ -42,6 +42,7 @@ import MyButton from './Button.vue';
 
 export default {
   name: 'my-header',
+  
 
   components: { MyButton },
 

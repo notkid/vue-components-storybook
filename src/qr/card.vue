@@ -1,8 +1,7 @@
 <template>
   <div class="z-card" :class="shadowClass"> 
-    <div class="header">
-      {{header}}
-      <slot></slot> 
+    <div class="header">    
+      <slot name="header">{{header}}</slot> 
     </div>
     <div class="m-body" :style="bodyStyle">
      <slot></slot>
