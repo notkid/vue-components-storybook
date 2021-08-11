@@ -1,6 +1,7 @@
 import Message from "./Message";
 import AButton from 'ant-design-vue/lib/button'
 import 'ant-design-vue/lib/button/style'
+
 import "./style/index.less";
 export default {
   title: "Example/Message",

@@ -1,12 +1,12 @@
-import Notification from '../vc-notification';
-import Icon from 'ant-design-vue/lib/icon';
+import Notification from "../vc-notification";
+import Icon from "ant-design-vue/lib/icon";
 
 let defaultDuration = 3;
 let defaultTop;
 let messageInstance;
 let key = 1;
-let prefixCls = 'ant-message';
-let transitionName = 'move-up';
+let prefixCls = "ant-message";
+let transitionName = "move-up";
 let getContainer = () => document.body;
 let maxCount;
 
@@ -23,57 +23,67 @@ function getMessageInstance(callback) {
       getContainer,
       maxCount,
     },
-    instance => {
+    (instance) => {
       if (messageInstance) {
         callback(messageInstance);
         return;
       }
       messageInstance = instance;
       callback(instance);
-    },
+    }
   );
 }
 
 // type NoticeType = 'info' | 'success' | 'error' | 'warning' | 'loading';
 
 function notice(args) {
-  const duration = args.duration !== undefined ? args.duration : defaultDuration;
+  const duration =
+    args.duration !== undefined ? args.duration : defaultDuration;
   const iconType = {
-    info: 'info-circle',
-    success: 'check-circle',
-    error: 'close-circle',
-    warning: 'exclamation-circle',
-    loading: 'loading',
+    info: "info-circle",
+    success: "check-circle",
+    error: "close-circle",
+    warning: "exclamation-circle",
+    loading: "loading",
   }[args.type];
 
   const target = args.key || key++;
-  const closePromise = new Promise(resolve => {
+  const closePromise = new Promise((resolve) => {
     const callback = () => {
-      if (typeof args.onClose === 'function') {
+      if (typeof args.onClose === "function") {
         args.onClose();
       }
       return resolve(true);
     };
-    getMessageInstance(instance => {
+    getMessageInstance((instance) => {
       instance.notice({
         key: target,
         duration,
         style: {},
-        content: h => {
+        content: (h) => {
           const iconNode = (
-            <Icon type={iconType} theme={iconType === 'loading' ? 'outlined' : 'filled'} />
+            <Icon
+              type={iconType}
+              theme={iconType === "loading" ? "outlined" : "filled"}
+            />
           );
-          const switchIconNode = iconType ? iconNode : '';
+          const switchIconNode = iconType ? iconNode : "";
           return (
             <div
-              class={`${prefixCls}-custom-content${args.type ? ` ${prefixCls}-${args.type}` : ''}`}
+              class={`${prefixCls}-custom-content${
+                args.type ? ` ${prefixCls}-${args.type}` : ""
+              }`}
             >
               {args.icon
-                ? typeof args.icon === 'function'
+                ? typeof args.icon === "function"
                   ? args.icon(h)
                   : args.icon
                 : switchIconNode}
-              <span>{typeof args.content === 'function' ? args.content(h) : args.content}</span>
+              <span>
+                {typeof args.content === "function"
+                  ? args.content(h)
+                  : args.content}
+              </span>
             </div>
           );
         },
@@ -96,7 +106,10 @@ function notice(args) {
 // export type ConfigOnClose = () => void;
 
 function isArgsProps(content) {
-  return Object.prototype.toString.call(content) === '[object Object]' && !!content.content;
+  return (
+    Object.prototype.toString.call(content) === "[object Object]" &&
+    !!content.content
+  );
 }
 
 // export interface ConfigOptions {
@@ -140,12 +153,12 @@ const api = {
   },
 };
 
-['success', 'info', 'warning', 'error', 'loading'].forEach(type => {
+["success", "info", "warning", "error", "loading"].forEach((type) => {
   api[type] = (content, duration, onClose) => {
     if (isArgsProps(content)) {
       return api.open({ ...content, type });
     }
-    if (typeof duration === 'function') {
+    if (typeof duration === "function") {
       onClose = duration;
       duration = undefined;
     }
